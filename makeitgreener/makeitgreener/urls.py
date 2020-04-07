@@ -20,5 +20,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('blog.urls')),
 
+    # TODO change 'accounts/' to '/'
     path('accounts/', include('allauth.urls')),
 ]
