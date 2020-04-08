@@ -21,5 +21,5 @@ urlpatterns = [
     path('', include('blog.urls')),
 
     # TODO change 'accounts/' to '/'
-    path('accounts/', include('allauth.urls')),
+    path('', include('allauth.urls')),
 ]
