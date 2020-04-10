@@ -65,11 +65,36 @@ function initMap() {
         var btn = document.getElementById('btn');
 
         btn.addEventListener('click', function () {
-            alert(infoWindow.getContent());
-
+            send_coordinates(infoWindow.getContent());
+            return false;
         })
 
 };
 
+
+let send_coordinates = (coordinates) => {
+    data = {'coords': coordinates};
+    send_ajax('/', data, 'get')
+};
+
+let send_ajax = (url, data, type, success = null, failure = null) => {
+
+
+    // if (type == 'POST' || type == 'post') {
+        
+    // }
+
+    $.ajax({url: url,
+            type: type,
+            data: data,
+            datatype: "json",
+            success: function(data) {
+                alert(JSON.stringify(data));
+                return false;
+            }
+        });
+    return false;
+
+};
 
 
