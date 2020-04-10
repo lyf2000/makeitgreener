@@ -1,1 +1,14 @@
 {% extends 'base.html' %}
+
+{% block content %}
+
+<div id="map"></div>
+
+
+<button id="btn">GO</button>
+
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBwm4q2hasHV5pnexuZMdy5RvIwmb6Kr20&callback=initMap">
+</script>
+
+{% endblock %}
