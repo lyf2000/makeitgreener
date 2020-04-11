@@ -7,6 +7,6 @@ import ast
 def index(request):
     if request.is_ajax():
         print('AJAX')
-        coords = ast.literal_eval(request.GET['coords'])
+        coords = ast.literal_eval(request.POST.get('coords', None))
         return JsonResponse({'data': 'OK'})
     return render(request, 'blog/index.html')

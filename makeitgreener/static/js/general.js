@@ -1,3 +1,30 @@
+let send_ajax = (url, data, type, success = null, failure = null) => {
+
+
+    // if (type == 'POST' || type == 'post') {
+        
+    // }
+
+    $.ajax({url: url,
+            type: type,
+            data: data,
+            datatype: "json",
+            success: function(data) {
+                alert(JSON.stringify(data));
+                return false;
+            }
+        });
+    return false;
+
+};
+
+
+let send_coordinates = (coordinates) => {
+    data = {'coords': coordinates};
+    send_ajax('/', data, 'POST')
+};
+
+
 function initMap() {
 
     // var element = document.getElementById('map');
@@ -53,6 +80,7 @@ function initMap() {
 
         // Configure the click listener.
         map.addListener('click', function(mapsMouseEvent) {
+            // TODO add marker icon
           // Close the current InfoWindow.
           infoWindow.close();
 
@@ -72,29 +100,6 @@ function initMap() {
 };
 
 
-let send_coordinates = (coordinates) => {
-    data = {'coords': coordinates};
-    send_ajax('/', data, 'get')
-};
 
-let send_ajax = (url, data, type, success = null, failure = null) => {
-
-
-    // if (type == 'POST' || type == 'post') {
-        
-    // }
-
-    $.ajax({url: url,
-            type: type,
-            data: data,
-            datatype: "json",
-            success: function(data) {
-                alert(JSON.stringify(data));
-                return false;
-            }
-        });
-    return false;
-
-};
 
 
