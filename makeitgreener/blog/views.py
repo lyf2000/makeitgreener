@@ -9,4 +9,4 @@ def index(request):
         print('AJAX')
         coords = ast.literal_eval(request.POST.get('coords', None))
         return JsonResponse({'data': 'OK'})
-    return render(request, 'blog/index.html')
+    return render(request, 'index.html')
