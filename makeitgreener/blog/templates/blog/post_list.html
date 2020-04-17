@@ -5,6 +5,16 @@
 
      <div id="post-list"></div>
 
-    <input type="button" value="Show" id="load-render-post-list">
+
+
+
+
+{#    <input type="button" value="Show" id="load-render-post-list">#}
+    <script>
+        $(document).ready(() => {
+            {#BtnClickLoadRenderPostList();#}
+            getModelListWithAPIAndToHTML('posts', loadAndRenderPostList);
+        })
+    </script>
 
 {% endblock %}
