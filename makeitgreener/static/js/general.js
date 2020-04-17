@@ -1,4 +1,4 @@
-let send_ajax = (url, data, type, success = null, failure = null) => {
+let send_ajax = (url, data, type, success = null, error = null) => {
 
 
     // if (type == 'POST' || type == 'post') {
@@ -10,13 +10,10 @@ let send_ajax = (url, data, type, success = null, failure = null) => {
         type: type,
         data: data,
         datatype: "json",
-        success: function (data) {
-            alert(JSON.stringify(data));
-            return false;
-        }
+        success: success,
+        error: error
     });
-    return false;
-
+    // return false;
 };
 
 
@@ -100,12 +97,37 @@ function initMap() {
 }
 
 
-let loadModelsWithAPI = (model, method, type, id=null, data=null) => {
-    let url = 'api/' + model + '/' + method + '/';
+const METHOD_TYPE_DICT = {
+    'list': 'GET',
+    'create': "POST",
+    'retrieve': 'GET',
+    'update': 'PUT'
+};
 
+let callAPI = (url, type, data=null, success=null, error=null) => {
+    return send_ajax(url, data, type, success, error);
+};
+
+let getModelListWithAPIAndToHTML = (model, success=null, error=null) => {
+
+    let url = '/api/' + model + '/';
+    callAPI(url, 'GET', {}, success, error);
 };
 
 
+let loadAndRenderPostList = (data) => {
+    data.forEach(addPosts)
+};
 
 
+let addPosts = (post) => {
+    console.log(post);
+    $('#post-list').append(`<h3>${post['author']}, ${post['title']}</h3>`);
+};
 
+let BtnClickLoadRenderPostList = () => {
+    $('#load-render-post-list').on('click', function () {
+        getModelListWithAPIAndToHTML('posts', loadAndRenderPostList);
+        return false;
+    });
+};
