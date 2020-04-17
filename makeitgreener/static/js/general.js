@@ -2,18 +2,19 @@ let send_ajax = (url, data, type, success = null, failure = null) => {
 
 
     // if (type == 'POST' || type == 'post') {
-        
+
     // }
 
-    $.ajax({url: url,
-            type: type,
-            data: data,
-            datatype: "json",
-            success: function(data) {
-                alert(JSON.stringify(data));
-                return false;
-            }
-        });
+    $.ajax({
+        url: url,
+        type: type,
+        data: data,
+        datatype: "json",
+        success: function (data) {
+            alert(JSON.stringify(data));
+            return false;
+        }
+    });
     return false;
 
 };
@@ -66,36 +67,41 @@ function initMap() {
     // });
 
 
-
     var myLatlng = {lat: 55.751244, lng: 37.618423};
 
-        var map = new google.maps.Map(
-            document.getElementById('map'), {zoom: 4, center: myLatlng});
+    var map = new google.maps.Map(
+        document.getElementById('map'), {zoom: 4, center: myLatlng});
 
-        // Create the initial InfoWindow.
-        var infoWindow = new google.maps.InfoWindow(
-            // {pos ition: myLatlng}
-            );
+    // Create the initial InfoWindow.
+    var infoWindow = new google.maps.InfoWindow(
+        // {pos ition: myLatlng}
+    );
+    infoWindow.open(map);
+
+    // Configure the click listener.
+    map.addListener('click', function (mapsMouseEvent) {
+        // TODO add marker icon
+        // Close the current InfoWindow.
+        infoWindow.close();
+
+        // Create a new InfoWindow.
+        infoWindow = new google.maps.InfoWindow({position: mapsMouseEvent.latLng});
+        infoWindow.setContent(mapsMouseEvent.latLng.toString());
         infoWindow.open(map);
+    });
 
-        // Configure the click listener.
-        map.addListener('click', function(mapsMouseEvent) {
-            // TODO add marker icon
-          // Close the current InfoWindow.
-          infoWindow.close();
+    var btn = document.getElementById('btn');
 
-          // Create a new InfoWindow.
-          infoWindow = new google.maps.InfoWindow({position: mapsMouseEvent.latLng});
-          infoWindow.setContent(mapsMouseEvent.latLng.toString());
-          infoWindow.open(map);
-        });
+    btn.addEventListener('click', function () {
+        send_coordinates(infoWindow.getContent());
+        return false;
+    })
 
-        var btn = document.getElementById('btn');
+}
 
-        btn.addEventListener('click', function () {
-            send_coordinates(infoWindow.getContent());
-            return false;
-        })
+
+let loadModelsWithAPI = (model, method, type, id=null, data=null) => {
+    let url = 'api/' + model + '/' + method + '/';
 
 };
 
