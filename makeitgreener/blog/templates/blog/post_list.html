@@ -5,9 +5,19 @@
 {% block content %}
 
     <section class="our_activity">
-            <section class="letast_news">
+        <section class="letast_news">
             <h2>latest news</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor <br> incididunt ut labore et dolore magna aliqua. </p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor <br> incididunt ut labore
+                et dolore magna aliqua. </p>
+            <form method="get">
+                {{ filter.form.as_p }}
+                <input type="submit"/>
+            </form>
+
+            {% for obj in filter.qs %}
+                {{ obj }}<br/>
+            {% endfor %}
+
             <div class="container">
                 <div id="post-list" class="row">
 
