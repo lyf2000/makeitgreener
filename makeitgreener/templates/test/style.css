@@ -15,6 +15,7 @@ h2:before{content: ""; position: absolute; left: 50%; bottom: 0; width: 100px; h
 :focus{outline: none;}
 
 .col-3{float: left; width: 27.33%;     padding: 0px; margin: 40px 3%; position: relative;} /* necessary to give position: relative to parent. */
+.col-2{float: left; width: 27.33%;     padding: 0px; margin: 40px 3%; position: relative;} /* necessary to give position: relative to parent. */
 input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width: 100%; box-sizing: border-box; letter-spacing: 1px;}
 
 .effect-1,
@@ -251,3 +252,11 @@ input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width
   max-height: 20rem;
   overflow-y: auto;
 }
+
+.inline {
+    display: inline-block;
+    margin:10px;
+    }
+
+
+
