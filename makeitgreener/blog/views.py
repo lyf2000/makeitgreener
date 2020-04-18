@@ -4,7 +4,7 @@ import ast
 # Create your views here.
 from django.views.generic import DetailView
 
-from blog.filters import PostFilter
+from blog.api.filters import PostFilter
 from blog.models import Post
 
 

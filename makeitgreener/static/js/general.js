@@ -108,15 +108,24 @@ let callAPI = (url, type, data = null, success = null, error = null) => {
     return send_ajax(url, data, type, success, error);
 };
 
-let getModelListWithAPIAndToHTML = (model, success = null, error = null) => {
+let getModelListWithAPIAndToHTML = (model, params, success, error) => {
 
     let url = '/api/' + model + '/';
+    if (params) {
+        url += '?' + params;
+    }
     callAPI(url, 'GET', {}, success, error);
 };
 
-
+// /posts
 let loadAndRenderPostList = (data) => {
     data.forEach(addPosts)
+};
+
+
+let loadAndRenderPostListFiltered = (data) => {
+    $('#post-list').empty();
+    loadAndRenderPostList(data);
 };
 
 
@@ -134,9 +143,13 @@ let addPosts = (post) => {
                     </div>`);
 };
 
-let BtnClickLoadRenderPostList = () => {
-    $('#load-render-post-list').on('click', function () {
-        getModelListWithAPIAndToHTML('posts', loadAndRenderPostList);
+
+let BtnClickPostListFilter = () =>  {
+    $('#load-render-post-list-filtered').on('click', function () {
+        let params = $('form#post-list-filter-form').serialize();
+        getModelListWithAPIAndToHTML('posts', params, loadAndRenderPostListFiltered, null);
         return false;
     });
 };
+
+
