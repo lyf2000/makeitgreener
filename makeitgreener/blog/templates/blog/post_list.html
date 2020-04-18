@@ -1,0 +1,28 @@
+{% extends 'index.html' %}
+{% load static %}
+
+
+{% block content %}
+
+    <section class="our_activity">
+            <section class="letast_news">
+            <h2>latest news</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor <br> incididunt ut labore et dolore magna aliqua. </p>
+            <div class="container">
+                <div id="post-list" class="row">
+
+
+                </div>
+            </div>
+        </section>
+    </section>
+
+
+    <script>
+        $(document).ready(() => {
+            {#BtnClickLoadRenderPostList();#}
+            getModelListWithAPIAndToHTML('posts', loadAndRenderPostList);
+        })
+    </script>
+
+{% endblock %}

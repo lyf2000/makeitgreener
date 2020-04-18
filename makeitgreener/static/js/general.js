@@ -1,21 +1,19 @@
-let send_ajax = (url, data, type, success = null, failure = null) => {
+let send_ajax = (url, data, type, success = null, error = null) => {
 
 
     // if (type == 'POST' || type == 'post') {
-        
+
     // }
 
-    $.ajax({url: url,
-            type: type,
-            data: data,
-            datatype: "json",
-            success: function(data) {
-                alert(JSON.stringify(data));
-                return false;
-            }
-        });
-    return false;
-
+    $.ajax({
+        url: url,
+        type: type,
+        data: data,
+        datatype: "json",
+        success: success,
+        error: error
+    });
+    // return false;
 };
 
 
@@ -66,40 +64,79 @@ function initMap() {
     // });
 
 
-
     var myLatlng = {lat: 55.751244, lng: 37.618423};
 
-        var map = new google.maps.Map(
-            document.getElementById('map'), {zoom: 4, center: myLatlng});
+    var map = new google.maps.Map(
+        document.getElementById('map'), {zoom: 4, center: myLatlng});
 
-        // Create the initial InfoWindow.
-        var infoWindow = new google.maps.InfoWindow(
-            // {pos ition: myLatlng}
-            );
+    // Create the initial InfoWindow.
+    var infoWindow = new google.maps.InfoWindow(
+        // {pos ition: myLatlng}
+    );
+    infoWindow.open(map);
+
+    // Configure the click listener.
+    map.addListener('click', function (mapsMouseEvent) {
+        // TODO add marker icon
+        // Close the current InfoWindow.
+        infoWindow.close();
+
+        // Create a new InfoWindow.
+        infoWindow = new google.maps.InfoWindow({position: mapsMouseEvent.latLng});
+        infoWindow.setContent(mapsMouseEvent.latLng.toString());
         infoWindow.open(map);
+    });
 
-        // Configure the click listener.
-        map.addListener('click', function(mapsMouseEvent) {
-            // TODO add marker icon
-          // Close the current InfoWindow.
-          infoWindow.close();
+    var btn = document.getElementById('btn');
 
-          // Create a new InfoWindow.
-          infoWindow = new google.maps.InfoWindow({position: mapsMouseEvent.latLng});
-          infoWindow.setContent(mapsMouseEvent.latLng.toString());
-          infoWindow.open(map);
-        });
+    btn.addEventListener('click', function () {
+        send_coordinates(infoWindow.getContent());
+        return false;
+    })
 
-        var btn = document.getElementById('btn');
+}
 
-        btn.addEventListener('click', function () {
-            send_coordinates(infoWindow.getContent());
-            return false;
-        })
 
+const METHOD_TYPE_DICT = {
+    'list': 'GET',
+    'create': "POST",
+    'retrieve': 'GET',
+    'update': 'PUT'
+};
+
+let callAPI = (url, type, data = null, success = null, error = null) => {
+    return send_ajax(url, data, type, success, error);
+};
+
+let getModelListWithAPIAndToHTML = (model, success = null, error = null) => {
+
+    let url = '/api/' + model + '/';
+    callAPI(url, 'GET', {}, success, error);
 };
 
 
+let loadAndRenderPostList = (data) => {
+    data.forEach(addPosts)
+};
 
 
+let addPosts = (post) => {
+    console.log(post);
+    $('#post-list').append(`<div class="col-md-12">
+                        <div class="single_news">
+                            <div class="texts">
+                                <p class="date"><a href="#">30 May, 2017</a></p>
+                                <h3>${post['title']}</h3>
+                                <p class="test">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                                <h3><a href="#">READ MORE</a></h3>
+                            </div>
+                        </div>
+                    </div>`);
+};
 
+let BtnClickLoadRenderPostList = () => {
+    $('#load-render-post-list').on('click', function () {
+        getModelListWithAPIAndToHTML('posts', loadAndRenderPostList);
+        return false;
+    });
+};
