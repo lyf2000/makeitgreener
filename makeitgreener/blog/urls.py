@@ -2,13 +2,14 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 
-from .views import index, post_list
+from .views import index, post_list, PostDetailView
 
 app_name = 'blog'
 
 urlpatterns = [
     path('', index, name='index'),
     path('posts/', post_list, name='post-list'),
+    path('post/<int:pk>', PostDetailView.as_view(), name='post-detail'),
     path('api/', include('blog.api.urls'))
 
 ]

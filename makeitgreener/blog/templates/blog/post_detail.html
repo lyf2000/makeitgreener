@@ -1,0 +1,40 @@
+{% extends 'index.html' %}
+
+
+{% block content %}
+
+
+    <section class="our_activity">
+        <section class="letast_news">
+            <h2>latest news</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor <br> incididunt ut labore
+                et dolore magna aliqua. </p>
+            <div class="container">
+                <div id="post-list" class="row">
+                    <div class="col-md-12">
+                        <div class="single_news">
+                            <div class="texts">
+                                <p class="date"><a href="#">30 May, 2017</a></p>
+                                <h3>{{ object.title }}</h3>
+                                <p class="test">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                                <h3><a href="#">READ MORE</a></h3>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </section>
+
+
+    <script>
+        $(document).ready(() => {
+
+
+        })
+    </script>
+
+
+
+{% endblock %}

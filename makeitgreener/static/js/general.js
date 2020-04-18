@@ -104,11 +104,11 @@ const METHOD_TYPE_DICT = {
     'update': 'PUT'
 };
 
-let callAPI = (url, type, data=null, success=null, error=null) => {
+let callAPI = (url, type, data = null, success = null, error = null) => {
     return send_ajax(url, data, type, success, error);
 };
 
-let getModelListWithAPIAndToHTML = (model, success=null, error=null) => {
+let getModelListWithAPIAndToHTML = (model, success = null, error = null) => {
 
     let url = '/api/' + model + '/';
     callAPI(url, 'GET', {}, success, error);
@@ -122,7 +122,16 @@ let loadAndRenderPostList = (data) => {
 
 let addPosts = (post) => {
     console.log(post);
-    $('#post-list').append(`<h3>${post['author']}, ${post['title']}</h3>`);
+    $('#post-list').append(`<div class="col-md-12">
+                        <div class="single_news">
+                            <div class="texts">
+                                <p class="date"><a href="#">30 May, 2017</a></p>
+                                <h3>${post['title']}</h3>
+                                <p class="test">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                                <h3><a href="#">READ MORE</a></h3>
+                            </div>
+                        </div>
+                    </div>`);
 };
 
 let BtnClickLoadRenderPostList = () => {

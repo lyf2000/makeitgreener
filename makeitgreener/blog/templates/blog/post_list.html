@@ -1,15 +1,23 @@
-{% extends 'base.html' %}
+{% extends 'index.html' %}
+{% load static %}
 
 
 {% block content %}
 
-     <div id="post-list"></div>
+    <section class="our_activity">
+            <section class="letast_news">
+            <h2>latest news</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor <br> incididunt ut labore et dolore magna aliqua. </p>
+            <div class="container">
+                <div id="post-list" class="row">
 
 
+                </div>
+            </div>
+        </section>
+    </section>
 
 
-
-{#    <input type="button" value="Show" id="load-render-post-list">#}
     <script>
         $(document).ready(() => {
             {#BtnClickLoadRenderPostList();#}
