@@ -4,15 +4,32 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" type="text/css" href="../../static/css/bootstrap.css" media="screen"/>
+    <script src="../../static/js/3.4.1_jquery.js"></script>
+    <script src="my.js"></script>
+    <link rel="stylesheet" type="text/css" href="my.js" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="style.css" media="screen"/>
+
 </head>
 <body>
 
 <!-- POST-LIST -->
 
+
+
+
 <div class="container">
 
 
-    <div class="card mb-3">
+
+    <div class="col-3 mv input-effect">
+        <input id="nin" class="effect-16" type="text" placeholder="">
+        <label>First Name</label>
+        <span class="focus-border"></span>
+    </div>
+
+
+
+    <div class="col-12 card mb-4">
         <div class="card-body">
             <h5 class="card-title">Card title</h5>
             <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
@@ -20,7 +37,7 @@
             <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
         </div>
     </div>
-    <div class="card">
+    <div class="card mb-4">
         <div class="card-body">
             <h5 class="card-title">Card title</h5>
             <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
@@ -46,22 +63,23 @@
 <div class="container">
     <!-- Card content -->
 
-     <div class="card-deck mb-3">
+    <div class="card-deck mb-3">
         <div class="card-body">
-    <div class="card-body card-body-cascade text-center">
+            <div class="card-body card-body-cascade text-center">
 
-        <!-- Title -->
-        <h4 class="card-title"><strong>My adventure</strong></h4>
-        <!-- Subtitle -->
-        <h6 class="font-weight-bold indigo-text py-2">Photography</h6>
-        <!-- Text -->
-        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem perspiciatis
-            voluptatum a, quo nobis, non commodi quia repellendus sequi nulla voluptatem dicta reprehenderit,
-            placeat
-            laborum ut beatae ullam suscipit veniam.
-        </p>
+                <!-- Title -->
+                <h4 class="card-title"><strong>My adventure</strong></h4>
+                <!-- Subtitle -->
+                <h6 class="font-weight-bold indigo-text py-2">Photography</h6>
+                <!-- Text -->
+                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem
+                    perspiciatis
+                    voluptatum a, quo nobis, non commodi quia repellendus sequi nulla voluptatem dicta reprehenderit,
+                    placeat
+                    laborum ut beatae ullam suscipit veniam.
+                </p>
 
-    </div>
+            </div>
         </div>
     </div>
 
@@ -72,5 +90,16 @@
 </div>
 
 
+<script>
+    // JavaScript for label effects only
+    $(".input-effect input").val("");
+    $(".input-effect input").focusout(function () {
+        if ($(this).val() != "") {
+            $(this).addClass("has-content");
+        } else {
+            $(this).removeClass("has-content");
+        }
+    });
+</script>
 </body>
 </html>
