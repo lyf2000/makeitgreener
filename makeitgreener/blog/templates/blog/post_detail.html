@@ -3,29 +3,40 @@
 
 {% block content %}
 
+    <div class="card card-cascade wider reverse">
 
-    <section class="our_activity">
-        <section class="letast_news">
-            <h2>latest news</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor <br> incididunt ut labore
-                et dolore magna aliqua. </p>
-            <div class="container">
-                <div id="post-list" class="row">
-                    <div class="col-md-12">
-                        <div class="single_news">
-                            <div class="texts">
-                                <p class="date"><a href="#">30 May, 2017</a></p>
-                                <h3>{{ object.title }}</h3>
-                                <p class="test">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                <h3><a href="#">READ MORE</a></h3>
-                            </div>
-                        </div>
-                    </div>
+    <!-- Card image -->
+    <div class="view view-cascade overlay">
+        <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg"
+             alt="Card image cap">
+        <a href="#">
+            <div class="mask rgba-white-slight"></div>
+        </a>
+    </div>
+</div>
 
-                </div>
+  <div class="card-deck mb-3">
+        <div class="card-body">
+            <div class="card-body card-body-cascade text-center">
+
+                <!-- Title -->
+                <h4 class="card-title"><strong>My adventure</strong></h4>
+                <!-- Subtitle -->
+                <h6 class="font-weight-bold indigo-text py-2">Photography</h6>
+                <!-- Text -->
+                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem
+                    perspiciatis
+                    voluptatum a, quo nobis, non commodi quia repellendus sequi nulla voluptatem dicta reprehenderit,
+                    placeat
+                    laborum ut beatae ullam suscipit veniam.
+                </p>
+
             </div>
-        </section>
-    </section>
+        </div>
+    </div>
+
+
+
 
 
     <script>
