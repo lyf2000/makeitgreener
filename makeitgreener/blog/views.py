@@ -4,6 +4,7 @@ import ast
 # Create your views here.
 from django.views.generic import DetailView
 
+from blog.api.filters import PostFilter
 from blog.models import Post
 
 
@@ -16,7 +17,8 @@ def index(request):
     return render(request, 'blog/index.html')
 
 def post_list(request):
-    return render(request, 'blog/post_list.html')
+    f = PostFilter(request.GET, queryset=Post.objects.all())
+    return render(request, 'blog/post_list.html', {'filter': f})
 
 
 class PostDetailView(DetailView):
