@@ -250,3 +250,11 @@ input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width
 h6.inline {
   margin: 15px 0 0 3px;
 }
+
+.fa.fa-star {
+    opacity: 0.4;
+}
+
+.fa.fa-star.stared {
+    opacity: 1.0;
+}
