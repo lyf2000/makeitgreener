@@ -13,7 +13,7 @@ def index(request):
         coords = ast.literal_eval(request.POST.get('coords', None))
         return JsonResponse({'data': 'OK'})
 
-    return render(request, 'index.html')
+    return render(request, 'blog/index.html')
 
 def post_list(request):
     return render(request, 'blog/post_list.html')
