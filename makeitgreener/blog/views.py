@@ -26,4 +26,4 @@ class PostDetailView(DetailView):
 
 
 def map(request):
-    return render(request, 'blog/mao.html')
+    return render(request, 'blog/map_test.html')
