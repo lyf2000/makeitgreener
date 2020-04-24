@@ -42,8 +42,11 @@ INSTALLED_APPS = [
     'users',
     'blog',
 
-    # libs
-    'mapwidgets',
+
+    'rest_framework',
+    'taggit',
+    'taggit_labels',
+    'django_filters',
 
 ]
 
@@ -131,3 +134,17 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # MEDIA_ROOT = '/home/admin/openunishkola/openunishkola/media/'
+
+
+
+# TAGGIT
+TAGGIT_CASE_INSENSITIVE = True
+
+
+# DRF
+# REST_FRAMEWORK = {
+#     'DEFAULT_FILTER_BACKENDS': (
+#         'django_filters.rest_framework.DjangoFilterBackend',
+#     ),
+# }
+
