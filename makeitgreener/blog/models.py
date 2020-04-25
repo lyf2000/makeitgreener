@@ -16,3 +16,10 @@ class Post(models.Model):
     def __str__(self):
         return f'Post: {self.title}'
 
+
+class Meet(models.Model):
+    lat = models.FloatField()
+    lng = models.FloatField()
+
+    def __str__(self):
+        return f'Meet({self.pk}): ({self.lat}; {self.lng})'

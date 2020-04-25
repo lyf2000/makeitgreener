@@ -17,7 +17,7 @@ from django.contrib import admin
 from taggit.forms import TagField
 from taggit_labels.widgets import LabelWidget
 
-from blog.models import Post
+from blog.models import Post, Meet
 
 
 class PostForm(forms.ModelForm):
@@ -43,3 +43,6 @@ class PostAdmin(admin.ModelAdmin):
         })
     )
 
+@admin.register(Meet)
+class MeetAdmin(admin.ModelAdmin):
+    pass
