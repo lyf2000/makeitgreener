@@ -26,4 +26,9 @@ class PostDetailView(DetailView):
 
 
 def map(request):
+    if request.is_ajax():
+        content = {}
+        coords = ast.literal_eval(request.POST.get('coords', None))
+        print(coords[0])
+        return JsonResponse({})
     return render(request, 'blog/map_test.html')
