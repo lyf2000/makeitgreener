@@ -8,7 +8,7 @@ app_name = 'blog'
 
 urlpatterns = [
     path('', index, name='index'),
-    path('map/', map, name='map'),
+    path('map/<int:pk>/', map, name='map'),
     path('posts/', post_list, name='post-list'),
     path('post/<int:pk>', PostDetailView.as_view(), name='post-detail'),
     path('api/', include('blog.api.urls'))

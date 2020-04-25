@@ -269,7 +269,7 @@ function initMap() {
         
         console.log(marker.position);
         
-        send_ajax('/map/', {'coords': String(marker.position)}, 'post')
+        send_ajax(document.location.pathname, {'coords': String(marker.position)}, 'post')
         return false;
     })
     
