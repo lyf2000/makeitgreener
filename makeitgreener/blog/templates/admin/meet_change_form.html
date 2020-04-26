@@ -15,7 +15,7 @@
 <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1GfHWxr871lHDL299zxsgFVjgnqE4e1s&callback=initMap&region=RU">
 </script>
-<script type="text/javascript" src="{% static 'js/general.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/mapAdmin.js' %}"></script>
 
 {% endblock %}
 
@@ -26,4 +26,17 @@
         width: 100%;
     }
 </style>
+{% endblock %}
+
+
+{% block admin_change_form_document_ready %}{{ block.super }}
+<script>
+    $('document').ready(function() {
+        var lat = {{ original.lat }};
+        var lng = {{ original.lng }};
+        var position = {"lat": lat, "lng": lng};
+        addCurrnetMeetMarker(position);
+        
+    })
+</script>
 {% endblock %}

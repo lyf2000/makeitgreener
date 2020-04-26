@@ -60,3 +60,9 @@ class MeetAdmin(admin.ModelAdmin):
 
     def mapp(self, obj):
         return mark_safe('<div id="map"></div>')
+
+    # def change_view(self, request, object_id, form_url='', extra_context=None):
+    #     extra = extra_context or {}
+    #     # extra['filter_form'] = FilterForm()
+    #     return super(ProcessAdmin, self).change_view(request, object_id,
+    #                                              form_url, extra_context=extra)
