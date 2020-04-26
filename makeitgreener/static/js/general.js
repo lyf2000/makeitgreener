@@ -1,3 +1,6 @@
+
+
+
 let send_ajax = (url, data, type, success = null, error = null) => {
 
 
@@ -96,14 +99,6 @@ let send_coordinates = (coordinates) => {
 
 // }
 
-
-const METHOD_TYPE_DICT = {
-    'list': 'GET',
-    'create': "POST",
-    'retrieve': 'GET',
-    'update': 'PUT'
-};
-
 let callAPI = (url, type, data = null, success = null, error = null) => {
     return send_ajax(url, data, type, success, error);
 };
@@ -188,12 +183,13 @@ let btnClickRemoveTagFromSelectedTagList = () => {
 };
 
 
-
+var map = null;
+var currMarker = null;
 
 
 function initMap() {
 
-    var map = new google.maps.Map(document.getElementById('map'), {
+    map = new google.maps.Map(document.getElementById('map'), {
       zoom: 3,
       center: {lat: -28.024, lng: 140.887}
     });
@@ -217,10 +213,10 @@ function initMap() {
     // });
     
     
-    var marker = new google.maps.Marker({
-                    position: {lat: 42.3601, lng: -71.0589},
-                    map: map
-                })
+    // var marker = new google.maps.Marker({
+    //                 position: {lat: 42.3601, lng: -71.0589},
+    //                 map: map
+    //             })
     
                 // map.addListener('center_changed', function() {
         // window.setTimeout(function() {
@@ -231,8 +227,8 @@ function initMap() {
     map.addListener('click', function(e) {
         // alert(e.latLng);
     
-        marker.setMap(null);
-        marker = new google.maps.Marker({
+        currMarker.setMap(null);
+        currMarker = new google.maps.Marker({
                 position: e.latLng,
                 map: map
       });
@@ -248,18 +244,19 @@ function initMap() {
     // var markerCluster = new MarkerClusterer(map, markers,
     //     {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
     
-    var infowindow = new google.maps.InfoWindow({
-              content: '<h3>Say WHaaaa</h3?'
-            });
+    // var infowindow = new google.maps.InfoWindow({
+    //           content: '<h3>Say WHaaaa</h3?'
+    //         });
     
-            marker.addListener('click', function() {
-                // alert(1);
-              infowindow.open(marker.get('map'), marker);
-            });
+    //         marker.addListener('click', function() {
+    //             // alert(1);
+    //           infowindow.open(marker.get('map'), marker);
+    //         });
     
             
     // map.addListener('click', function(e) {
-    //             var marker = new google.maps.Marker({
+            
+    //             currMarker = new google.maps.Marker({
     //             position: {lat: 42.3601, lng: -71.0589},
     //             map: map
     //         })
@@ -267,10 +264,18 @@ function initMap() {
         
     $('#btn').on('click', function(e) {
         
-        console.log(marker.position);
+        console.log(currMarker.position);
         
-        send_ajax(document.location.pathname, {'coords': String(marker.position)}, 'post')
+        send_ajax(document.location.pathname, {'coords': String(currMarker.position)}, 'post')
         return false;
     })
     
     }
+
+let addCurrnetMeetMarker = (position) => {
+    map.setCenter(position);
+    currMarker = new google.maps.Marker({
+        position: position,
+        map: map
+    });
+};
