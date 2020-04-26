@@ -42,11 +42,11 @@ INSTALLED_APPS = [
     'users',
     'blog',
 
+
     'rest_framework',
     'taggit',
     'taggit_labels',
     'django_filters',
-
 
 ]
 
@@ -136,6 +136,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # MEDIA_ROOT = '/home/admin/openunishkola/openunishkola/media/'
 
 
+
 # TAGGIT
 TAGGIT_CASE_INSENSITIVE = True
 
@@ -146,3 +147,4 @@ TAGGIT_CASE_INSENSITIVE = True
 #         'django_filters.rest_framework.DjangoFilterBackend',
 #     ),
 # }
+

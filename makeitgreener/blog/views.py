@@ -5,8 +5,7 @@ import ast
 from django.views.generic import DetailView
 
 from blog.api.filters import PostFilter
-from blog.models import Post
-
+from blog.models import Meet, Post
 
 def index(request):
     if request.is_ajax():
@@ -24,3 +23,16 @@ def post_list(request):
 class PostDetailView(DetailView):
     model = Post
     template_name = 'blog/post_detail.html'
+
+
+def map(request, pk):
+    meet = Meet.objects.get(id=pk)
+    if request.is_ajax():
+        coords = ast.literal_eval(request.POST.get('coords', None))
+        print(coords[0])
+        meet.lat = coords[0]
+        meet.lng = coords[1]
+        meet.save()
+        return JsonResponse({})
+
+    return render(request, 'blog/map_test.html', {'meet': meet})
