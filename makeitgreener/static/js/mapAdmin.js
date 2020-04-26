@@ -23,12 +23,14 @@ function initMap() {
     
     map.addListener('click', function(e) {
         // alert(e.latLng);
-    
+        
         currMarker.setMap(null);
         currMarker = new google.maps.Marker({
                 position: e.latLng,
                 map: map
       });
+      $('input[name ="lat"]').val(currMarker.getPosition()['lat']())
+      $('input[name ="lng"]').val(currMarker.getPosition()['lng']())
     })
     
     
@@ -63,7 +65,6 @@ function initMap() {
     }
 
     let addCurrnetMeetMarker = (position) => {
-        alert(123);
         map.setCenter(position);
         currMarker = new google.maps.Marker({
             position: position,
