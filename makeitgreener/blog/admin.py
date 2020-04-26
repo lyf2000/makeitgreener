@@ -18,6 +18,7 @@ from taggit.forms import TagField
 from taggit_labels.widgets import LabelWidget
 
 from blog.models import Post, Meet
+from django.utils.safestring import mark_safe
 
 
 class PostForm(forms.ModelForm):
@@ -45,4 +46,17 @@ class PostAdmin(admin.ModelAdmin):
 
 @admin.register(Meet)
 class MeetAdmin(admin.ModelAdmin):
-    pass
+    change_form_template = 'admin/meet_change_form.html'
+
+    readonly_fields = ('mapp', )
+
+    fieldsets = (
+        ('Standard info', {
+            'fields': ('lat', 'lng', ('mapp'),
+                        ),
+    }),
+    )
+        
+
+    def mapp(self, obj):
+        return mark_safe('<div id="map"></div>')
