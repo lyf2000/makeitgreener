@@ -44,9 +44,19 @@ class PostAdmin(admin.ModelAdmin):
         })
     )
 
+
+class MeetForm(forms.ModelForm):
+    tags = TagField(required=False, widget=LabelWidget)
+
+    class Meta:
+        model = Meet
+        exclude = []
+
+
 @admin.register(Meet)
 class MeetAdmin(admin.ModelAdmin):
     change_form_template = 'admin/meet_change_form.html'
+    form = MeetForm
 
     readonly_fields = ('mapp', )
 
@@ -54,7 +64,12 @@ class MeetAdmin(admin.ModelAdmin):
         ('Standard info', {
             'fields': ('lat', 'lng', ('mapp'),
                         ),
-    }),
+        }),
+        ('Tags', {
+                'fields': ('tags',
+                        ),
+        }),
+        
     )
         
 
