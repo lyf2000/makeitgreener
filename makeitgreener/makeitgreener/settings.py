@@ -49,6 +49,9 @@ INSTALLED_APPS = [
     'django_filters',
     'taggit_serializer',
     'crispy_forms',
+    'ckeditor',
+    'ckeditor_uploader',
+
 ]
 
 MIDDLEWARE = [
@@ -149,3 +152,15 @@ TAGGIT_CASE_INSENSITIVE = True
 #     ),
 # }
 
+
+# CKEDITOR
+CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_CONFIGS = {
+
+    'default': {
+
+     'toolbar': 'None'
+
+    },
+
+}
