@@ -148,14 +148,36 @@ let BtnClickPostListFilter = () =>  {
 
 
 $(document).keyup(function (e) {
-    if ($("#nin:focus") && (e.keyCode === 13)) {
-
+    if ($("#nin").is(":focus") && (e.keyCode === 13)) {
+        
+        collectFilterDataPostList();
     }
 });
 
+
+let collectFilterDataPostList = () => {
+    
+    var searchText = $('#nin').val();
+    var tagNameList = getTagNamesToFilterPostList();
+    alert(searchText);
+    alert(tagNameList);
+}
+
+let getTagNamesToFilterPostList = () => {
+    nameList = []
+    
+    $.each($('.tag-badge'), function() {
+        nameList.push($(this).data('name'));
+    })
+
+    return nameList;
+}
+
+
 $(document).keyup(function (e) {
 
-    if ($("#select-tag-input:focus") && (e.keyCode === 13)) {
+    if ($("#select-tag-input").is(":focus") && (e.keyCode === 13)) {
+        
         let selectTagInput = $("#select-tag-input");
         //TODO already in list
         let newTagName = selectTagInput.val().replace(/ /g, '').toLowerCase();
