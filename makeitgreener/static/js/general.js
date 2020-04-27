@@ -126,16 +126,14 @@ let loadAndRenderPostListFiltered = (data) => {
 
 let addPosts = (post) => {
     console.log(post);
-    $('#post-list').append(`<div class="col-md-12">
-                        <div class="single_news">
-                            <div class="texts">
-                                <p class="date"><a href="#">30 May, 2017</a></p>
-                                <h3>${post['title']}</h3>
-                                <p class="test">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                <h3><a href="#">READ MORE</a></h3>
-                            </div>
-                        </div>
-                    </div>`);
+    $('#post-list').append(`<div class="col-12 card mb-4">
+    <div class="card-body">
+        <h5 class="card-title">Card title ${post['title']}</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
+            content. This content is a little bit longer.</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    </div>
+</div>`);
 };
 
 
