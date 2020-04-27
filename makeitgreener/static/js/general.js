@@ -126,16 +126,14 @@ let loadAndRenderPostListFiltered = (data) => {
 
 let addPosts = (post) => {
     console.log(post);
-    $('#post-list').append(`<div class="col-md-12">
-                        <div class="single_news">
-                            <div class="texts">
-                                <p class="date"><a href="#">30 May, 2017</a></p>
-                                <h3>${post['title']}</h3>
-                                <p class="test">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                <h3><a href="#">READ MORE</a></h3>
-                            </div>
-                        </div>
-                    </div>`);
+    $('#post-list').append(`<div class="col-12 card mb-4">
+    <div class="card-body">
+        <h5 class="card-title">Card title ${post['title']}</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
+            content. This content is a little bit longer.</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    </div>
+</div>`);
 };
 
 
@@ -150,14 +148,36 @@ let BtnClickPostListFilter = () =>  {
 
 
 $(document).keyup(function (e) {
-    if ($("#nin:focus") && (e.keyCode === 13)) {
-
+    if ($("#nin").is(":focus") && (e.keyCode === 13)) {
+        
+        collectFilterDataPostList();
     }
 });
 
+
+let collectFilterDataPostList = () => {
+    
+    var searchText = $('#nin').val();
+    var tagNameList = getTagNamesToFilterPostList();
+    alert(searchText);
+    alert(tagNameList);
+}
+
+let getTagNamesToFilterPostList = () => {
+    nameList = []
+    
+    $.each($('.tag-badge'), function() {
+        nameList.push($(this).data('name'));
+    })
+
+    return nameList;
+}
+
+
 $(document).keyup(function (e) {
 
-    if ($("#select-tag-input:focus") && (e.keyCode === 13)) {
+    if ($("#select-tag-input").is(":focus") && (e.keyCode === 13)) {
+        
         let selectTagInput = $("#select-tag-input");
         //TODO already in list
         let newTagName = selectTagInput.val().replace(/ /g, '').toLowerCase();

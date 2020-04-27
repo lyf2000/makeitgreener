@@ -1,45 +1,47 @@
 {% extends 'index.html' %}
 {% load static %}
+{% load crispy_forms_field  %}
 
 
 {% block content %}
 
-    <div>
-        <div class="col-3 input-effect inline">
-            <input id="nin" class="effect-16" type="text" placeholder="">
-            <label>First Name</label>
-            <span class="focus-border"></span>
-        </div>
+<form id="post-list-filter-form" method="get">
+    
+<div class="col-3 input-effect inline">
+    
+        {% crispy_field filter.form.title 'class' 'effect-16' 'placeholder' 'Search' %}
+        <span class="focus-border"></span>
+</div><br>
 
-        <div class="col-2 input-effect inline">
+<input hidden id="load-render-post-list-filtered" type="submit"/>
+
+</form>
+
+
+<div id="post-list">
+
+
+    
+</div>
+
+    <div>
+        <!-- <div class="col-3 input-effect inline">
+            <input id="nin" class="effect-16" type="text" placeholder="Serach">
+            <!-- <label>First Name</label> -->
+            <!-- <span class="focus-border"></span>
+        </div>  -->
+
+        <!-- <div class="col-2 input-effect inline">
             <input id="select-tag-input" class="effect-16" type="text" placeholder="">
             <label>Tags</label>
             <span class="focus-border"></span>
         </div>
         <div id="selected-tags-list">
 
-        </div>
+        </div>  -->
     </div>
 
-    <div class="col-12 card mb-4">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
-                content. This content is a little bit longer.</p>
-            <p class="card-text">
-                <small class="text-muted">
-                    <span class="fa fa-thumbs-up"></span>235 <span class="fa fa-star stared"></span> Last updated 3 mins
-                    ago</small></p>
-        </div>
-    </div>
-    <div class="col-12 card mb-4">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
-                content. This content is a little bit longer.</p>
-            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-        </div>
-    </div>
+    
 
 
     <script>
@@ -56,7 +58,7 @@
                 }
             });
 
-            btnClickRemoveTagFromSelectedTagList();
+            // btnClickRemoveTagFromSelectedTagList();
 
             getModelListWithAPIAndToHTML('posts', '', loadAndRenderPostList, null);
             BtnClickPostListFilter();

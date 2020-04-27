@@ -21,5 +21,7 @@ class Meet(models.Model):
     lat = models.FloatField()
     lng = models.FloatField()
 
+    tags = TaggableManager()
+
     def __str__(self):
         return f'Meet({self.pk}): ({self.lat}; {self.lng})'
