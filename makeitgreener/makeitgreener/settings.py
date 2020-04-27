@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     'taggit_labels',
     'django_filters',
     'taggit_serializer',
-    
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
