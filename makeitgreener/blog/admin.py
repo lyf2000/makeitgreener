@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib import admin
+from martor.widgets import AdminMartorWidget
 
 # Register your models here.
 
@@ -19,6 +20,7 @@ from taggit_labels.widgets import LabelWidget
 
 from blog.models import Post, Meet
 from django.utils.safestring import mark_safe
+from django.db import models
 
 
 class PostForm(forms.ModelForm):
@@ -31,6 +33,10 @@ class PostForm(forms.ModelForm):
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
+    formfield_overrides = {
+        models.TextField: {'widget': AdminMartorWidget},
+    }
+    
     form = PostForm
 
     fieldsets = (

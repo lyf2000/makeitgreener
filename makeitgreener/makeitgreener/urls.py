@@ -28,8 +28,8 @@ urlpatterns = [
     path('', include('blog.urls')),
 
 
-    path('ckeditor/', include('ckeditor_uploader.urls')),
-    
+    # path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('martor/', include('martor.urls')),
 ]
 
 if settings.DEBUG:
