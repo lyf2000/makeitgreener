@@ -10,7 +10,7 @@ urlpatterns = [
     path('', index, name='index'),
     path('map/<int:pk>/', map, name='map'),
     path('posts/', post_list, name='post-list'),
-    path('post/<int:pk>', PostDetailView.as_view(), name='post-detail'),
+    path('posts/<int:pk>', PostDetailView.as_view(), name='post-detail'),
     path('api/', include('blog.api.urls'))
 
 ]

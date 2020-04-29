@@ -1,5 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.db import models
+from martor.models import MartorField
+# from ckeditor_uploader.fields import RichTextUploadingField
 
 # Create your models here.
 from taggit.managers import TaggableManager
@@ -12,6 +14,9 @@ class Post(models.Model):
     tags = TaggableManager()
 
     # TODO preview text, main image
+
+    # text = RichTextUploadingField()
+    text = MartorField()
 
     def __str__(self):
         return f'Post: {self.title}'

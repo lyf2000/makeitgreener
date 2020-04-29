@@ -119,3 +119,4 @@ vscode
 # IDEA
 .DS_Store
 .idea
+staticfiles
