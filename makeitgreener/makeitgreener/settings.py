@@ -43,10 +43,22 @@ INSTALLED_APPS = [
     'users',
     'blog',
 
+
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+
+    'rest_framework',
+    'taggit',
+    'taggit_labels',
+    'django_filters',
+    'taggit_serializer',
+    'crispy_forms',
+    'martor',
+    # 'ckeditor',
+    # 'ckeditor_uploader',
+
 
 ]
 
@@ -138,6 +150,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # MEDIA_ROOT = '/home/admin/openunishkola/openunishkola/media/'
 
 
+
 LOGIN_REDIRECT_URL = '/'
 
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
@@ -164,3 +177,27 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'nda030600@gmail.com'
 EMAIL_HOST_PASSWORD = 'LFVBH0110'
 EMAIL_USE_SSL = False
+
+# TAGGIT
+TAGGIT_CASE_INSENSITIVE = True
+
+
+# DRF
+# REST_FRAMEWORK = {
+#     'DEFAULT_FILTER_BACKENDS': (
+#         'django_filters.rest_framework.DjangoFilterBackend',
+#     ),
+# }
+
+
+# CKEDITOR
+# CKEDITOR_UPLOAD_PATH = "uploads/"
+# CKEDITOR_CONFIGS = {
+
+#     'default': {
+
+#      'toolbar': 'None'
+
+#     },
+
+# }
