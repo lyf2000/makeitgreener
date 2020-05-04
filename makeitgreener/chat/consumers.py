@@ -14,7 +14,7 @@ User = get_user_model()
 
 # TODO send case error
 
-async def add(s, urls):
+async def add_chat(s, urls):
     tasks = [s.channel_layer.group_add(
         id,
         s.channel_name
@@ -38,19 +38,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
 
         self.chat_group_id_list = list([f'chat_{chat_id}' for chat_id in chat_id_list])
 
-        await add(self, self.chat_group_id_list)
-
-        #
-        # async for chat_group_id in self.chat_group_id_list:
-        #     await self.channel_layer.group_discard(
-        #         chat_group_id,
-        #         self.channel_name
-        #     )
-
-        # async_to_sync(self.channel_layer.group_add(
-        #     chat_group_id,
-        #     self.channel_name
-        # ) for chat_group_id in self.chat_group_id_list)
+        await add_chat(self, self.chat_group_id_list)
 
         await self.accept()
 
@@ -68,12 +56,13 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         elif command == 'send':
             await self.send_message(content['message'])
         elif command == 'send_chat':
-            group, text = content['message'].split(' ')
+            group = content['chat_id']
+            message_text = content['message']
             await self.channel_layer.group_send(
                 group,
                 {
                     'type': 'chat_message',
-                    'message': text,
+                    'message': message_text,
                     'group': group
                 }
             )
@@ -84,6 +73,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         await self.send_json({'message': message})
 
     async def chat_message(self, event):
+        # TODO check all is fine
         message = event['message']
         group = event['group']
         m = ' '.join([group, message])
@@ -93,36 +83,21 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
 class NotifyConsumer(AsyncJsonWebsocketConsumer):
 
     async def connect(self):
-        print('conn', self)
-
-        # self.room_name = self.scope['url_route']['kwargs']['room_name']
-        self.room_name = 'chatt'
-        self.room_group_name = 'chat_%s' % self.room_name
-
-        self.rooms = []
-
-        self.rooms.append('chat_chatt')
-        self.rooms.append('chat_chattAAA')
+        user = self.scope['user']
+        self.user_group_id = f'notify_user_{user.pk}'
 
         await self.channel_layer.group_add(
-            self.room_group_name,
-            self.channel_name
-        )
-
-        await self.channel_layer.group_add(
-            self.room_group_name + 'AAA',
+            self.user_group_id,
             self.channel_name
         )
 
         await self.accept()
 
     async def disconnect(self, code):
-        print('dissc', self)
-        for room in self.rooms:
-            await self.channel_layer.group_discard(
-                room,
-                self.channel_name
-            )
+        await self.channel_layer.group_discard(
+            self.user_group_id,
+            self.channel_name
+        )
 
     async def receive_json(self, content):
         print('recs', self, content)
@@ -147,8 +122,8 @@ class NotifyConsumer(AsyncJsonWebsocketConsumer):
         else:
             await self.send_json({'error': 'What\'s the fucking wrong command??'})
 
-    async def chat_join(self, room):
-        self.rooms.append(room)
+    # async def chat_join(self, room):
+    #     self.rooms.append(room)
 
     async def send_message(self, message):
         await self.send_json({'message': message})
