@@ -34,6 +34,13 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
 
     async def connect(self):
         user = self.scope['user']
+
+        # self.user_group_id = f'notify_user_{user.pk}'
+        # await self.channel_layer.group_add(
+        #     self.user_group_id,
+        #     self.channel_name
+        # )
+
         chat_id_list = user.chats.all().values_list('id', flat=True)
 
         self.chat_group_id_list = list([f'chat_{chat_id}' for chat_id in chat_id_list])
@@ -45,6 +52,11 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
     async def disconnect(self, code):
 
         await disc(self, self.chat_group_id_list)
+
+        # await self.channel_layer.group_discard(
+        #     self.user_group_id,
+        #     self.channel_name
+        # )
 
     async def receive_json(self, content):
         print('recs', self, content)
@@ -108,17 +120,17 @@ class NotifyConsumer(AsyncJsonWebsocketConsumer):
             pass
         elif command == 'send':
             await self.send_message(content['message'])
-        elif command == 'send_group':
-            await self.send_message(content['message'])
-
-            # await self.channel_layer.group_send(
-            #     'area',
-            #     {
-            # 'type': 'chat_message',
-            # 'type': 'send_message',
-            # 'message': content['message'],
-            # }
-            # )
+        elif command == 'send_chat':
+            group = content['chat_id']
+            message_text = content['message']
+            await self.channel_layer.group_send(
+                group,
+                {
+                    'type': 'chat_message',
+                    'message': message_text,
+                    'group': group
+                }
+            )
         else:
             await self.send_json({'error': 'What\'s the fucking wrong command??'})
 
@@ -128,10 +140,11 @@ class NotifyConsumer(AsyncJsonWebsocketConsumer):
     async def send_message(self, message):
         await self.send_json({'message': message})
 
-    # def chat_message(self, event):
-    #     message = event['message']
-    #     self.send(text_data=json.dumps(message))
-
+    async def chat_message(self, event):
+        message = event['message']
+        group = event['group']
+        m = ' '.join([group, message])
+        await self.send(text_data=json.dumps({'message': m}))
 # class ChattConsumer(WebsocketConsumer):
 #
 #     def fetch_messages(self, data):
