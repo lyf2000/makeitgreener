@@ -120,3 +120,4 @@ vscode
 .DS_Store
 .idea
 staticfiles
+*.rdb

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # apps
     'users',
     'blog',
+    'chat',
 
 
     'rest_framework',
@@ -50,6 +51,7 @@ INSTALLED_APPS = [
     'taggit_serializer',
     'crispy_forms',
     'martor',
+    'channels',
     # 'ckeditor',
     # 'ckeditor_uploader',
 
@@ -84,6 +86,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'makeitgreener.wsgi.application'
+ASGI_APPLICATION = "makeitgreener.routing.application"
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
@@ -93,6 +96,19 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
+}
+
+
+redis_host = os.environ.get('REDIS_HOST', 'localhost')
+
+CHANNEL_LAYERS = {
+    "default": {
+        # This example app uses the Redis channel layer implementation channels_redis
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
 }
 
 # Password validation

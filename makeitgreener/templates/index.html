@@ -10,6 +10,8 @@
 
     <script src="{% static 'js/3.4.1_jquery.js' %}"></script>
     <script src="{% static 'js/general.js' %}"></script>
+    <script src="{% static 'js/reconnecting-websocket.min.js' %}"></script>
+
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" media="screen"/>
 
 </head>
@@ -20,6 +22,8 @@
 <div class="container">
     {% block content %}{% endblock %}
 </div>
+
+{% block extra_js %}
 
      <script>
 
@@ -56,6 +60,8 @@
 
     </script>
 
+
+{% endblock %}
 
 </body>
 </html>
